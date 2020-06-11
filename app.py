@@ -14,6 +14,7 @@ newapiurl2 = '.cf/aliases/'
 
 curdomain = int(open('/home/rgbhack/ALTR-Backend/curdomain').read())
 curnum = int(open('/home/rgbhack/ALTR-Backend/curnum').read())
+number_position = int(open('/home/rgbhack/ALTR-Backend/number_position').read())
 
 @app.route('/create',methods=['POST'])
 def create():
@@ -21,6 +22,7 @@ def create():
 	global apiurl
 	global curdomain
 	global curnum
+	global number_position
 	if curnum == 10:
 		curdomain = curdomain + 1
 		with open('/home/rgbhack/ALTR-Backend/curnum', 'w') as f:
@@ -39,7 +41,12 @@ def create():
 	newmail = request.json["youremail"]
 	uid = request.json["uid"]
 	ret = {}
-	email = username+str(random.randrange(100000,999999))
+	number_position = number_position + 1
+	with open('/home/rgbhack/ALTR-Backend/number_position', 'w') as f:
+		f.write(str(number_position))
+	numbers = open('/home/rgbhack/ALTR-Backend/numbers','r').readlines()
+	num = numbers[number_position].strip()
+	email = username+num
 	ret["email"] = email+"@altr"+str(curdomain)+".cf"
 	r = requests.post(url=apiurl1+str(curdomain)+apiurl2,headers={'Authorization':'Basic api:'+apikey},json={"forward":newmail,"alias":email})
 	with open('/home/rgbhack/ALTR-Backend/logs.txt', 'w') as f:
