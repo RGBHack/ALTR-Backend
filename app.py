@@ -48,6 +48,7 @@ def create():
 		f.write(ret["email"])
 	with open('/home/rgbhack/ALTR-Backend/status/'+ret["email"], 'w') as f:
 		f.write("on")
+	ret["res"] = 0
 	return jsonify(ret)
 
 @app.route('/on',methods=['POST'])
@@ -58,10 +59,10 @@ def on():
 	uid = request.json["uid"]
 	youremail = request.json["youremail"]
 	if not os.path.exists('/home/rgbhack/ALTR-Backend/people/'+email):
-		return jsonify({"ERROR":"NOT AN EMAIL DUMMY"})
+		return jsonify({"ERROR":2000})
 	true_uid = open('/home/rgbhack/ALTR-Backend/people/'+email,'r').read()
 	if not true_uid == uid:
-		return jsonify({"ERROR":"BAD UID"})
+		return jsonify({"res":1000})
 
 	alias = email.split('@')[0]
 	domain1 = email.split('@altr')[1]
@@ -79,10 +80,10 @@ def off():
 	uid = request.json["uid"]
 	youremail = request.json["youremail"]
 	if not os.path.exists('/home/rgbhack/ALTR-Backend/people/'+email):
-		return jsonify({"ERROR":"NOT AN EMAIL DUMMY"})
+		return jsonify({"res":2000})
 	true_uid = open('/home/rgbhack/ALTR-Backend/people/'+email,'r').read()
 	if not true_uid == uid:
-		return jsonify({"ERROR":"BAD UID"})
+		return jsonify({"res":1000})
 	alias = email.split('@')[0]
 	domain1 = email.split('@altr')[1]
 	domain = domain1.split('.cf')[0]
@@ -91,29 +92,29 @@ def off():
 	r = requests.put(url=newapiurl1+domain+newapiurl2+alias,headers={'Authorization':'Basic api:'+apikey},json={"forward":"hi@altr.cf"},verify=False)
 	with open('/home/rgbhack/ALTR-Backend/logs.txt','w') as f:
 		print(newapiurl1+domain+newapiurl2+alias,file=f)
-	return(jsonify({"done":"done"}))
+	return(jsonify({"res":0}))
 
 @app.route('/emails',methods=['POST'])
 def emails():
 	uid = request.json["uid"]
 	if not os.path.exists('/home/rgbhack/ALTR-Backend/persons/'+uid):
-		return jsonify({"ERROR":"BAD UID"})
+		return jsonify({"res":3000})
 	with open('/home/rgbhack/ALTR-Backend/persons/'+uid, 'r') as f:
 		base_lines = f.readlines()
 		lines = []
 		for line in base_lines:
 			lines.append(line.strip())
-		return(jsonify({"emails":lines}))
+		return(jsonify({"emails":lines,"res":0}))
 
 @app.route('/status',methods=['POST'])
 def status():
 	uid = request.json["uid"]
 	email = request.json["email"]
 	if not os.path.exists('/home/rgbhack/ALTR-Backend/people/'+email):
-		return jsonify({"ERROR":"NOT AN EMAIL DUMMY"})
+		return jsonify({"res":2000})
 	true_uid = open('/home/rgbhack/ALTR-Backend/people/'+email,'r').read()
 	if not true_uid == uid:
-		return jsonify({"ERROR":"BAD UID"})
+		return jsonify({"res":1000})
 	with open('/home/rgbhack/ALTR-Backend/status/'+email, 'r') as f:
 		return jsonify({"status":f.read()})
 
