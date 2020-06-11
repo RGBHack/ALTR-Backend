@@ -32,6 +32,8 @@ def create():
 		curnum = curnum + 1
 		with open('/home/rgbhack/ALTR-Backend/curnum', 'w') as f:
 			f.write(str(curnum))
+	if curdomain > 5:
+		return jsonify({"res":4000})
 
 	username = request.json["username"]
 	newmail = request.json["youremail"]
@@ -59,7 +61,7 @@ def on():
 	uid = request.json["uid"]
 	youremail = request.json["youremail"]
 	if not os.path.exists('/home/rgbhack/ALTR-Backend/people/'+email):
-		return jsonify({"ERROR":2000})
+		return jsonify({"res":2000})
 	true_uid = open('/home/rgbhack/ALTR-Backend/people/'+email,'r').read()
 	if not true_uid == uid:
 		return jsonify({"res":1000})
@@ -70,7 +72,7 @@ def on():
 	with open('/home/rgbhack/ALTR-Backend/status/'+email,'w') as f:
 		f.write("on")
 	r = requests.put(url=newapiurl1+domain+newapiurl2+alias,headers={'Authorization':'Basic api:'+apikey},json={"forward":youremail},verify=False)
-	return(jsonify({"done":"done"}))
+	return(jsonify({"res":0}))
 
 @app.route('/off',methods=['POST'])
 def off():
@@ -116,7 +118,7 @@ def status():
 	if not true_uid == uid:
 		return jsonify({"res":1000})
 	with open('/home/rgbhack/ALTR-Backend/status/'+email, 'r') as f:
-		return jsonify({"status":f.read()})
+		return jsonify({"status":f.read(),"res":0})
 
 @app.route('/')
 def index():
