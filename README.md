@@ -128,7 +128,7 @@ jQuery.ajax({
 
 ```json
 {
-  "emails": ["google12348@altr1.cf", "facebook12431@altr1.cf"],
+  "emails": {"google12348@altr1.cf":"off", "facebook12431@altr1.cf":"on"},
   "res": 0
 }
 ```
