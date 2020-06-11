@@ -39,7 +39,7 @@ jQuery.ajax({
 {
   "youremail": "example@example.com",
   "uid": "AFJNJSA70ASFKSAFD80",
-  "name": "gmail"
+  "name": "google"
 }
 ```
 
