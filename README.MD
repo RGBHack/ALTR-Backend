@@ -1,15 +1,17 @@
 # ALTR-Backend
 
-## Res codes
-0 = successful<br>
-1000 = incorrect UID (ie UID does not own email specified) <br>
-2000 = non-existent email <br>
-3000 = non-existent UID <br>
-4000 = no more emails (domains have ran out) <br>
-5000 = too many emails for user
+## res codes
+<ul>
+  <li>0 = successful</li>
+  <li>1000 = incorrect UID (ie UID does not own email specified)</li>
+  <li>2000 = non-existent email</li>
+  <li>3000 = non-existent UID</li>
+  <li>4000 = no more emails (domains have ran out)</li>
+  <li>5000 = alias limit reached for user</li>
+<ul>
 
 ## altr.cf/create
-Post Request to Backend Service
+input
 ```
 {
 "youremail":"example@example.com",
