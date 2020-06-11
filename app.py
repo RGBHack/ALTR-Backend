@@ -127,6 +127,35 @@ def status():
 	with open('/home/rgbhack/ALTR-Backend/status/'+email, 'r') as f:
 		return jsonify({"status":f.read(),"res":0})
 
+@app.route('/delete',methods=['POST'])
+def delete():
+	global apikey
+	global apiurl
+	email = request.json["email"]
+	uid = request.json["uid"]
+	if not os.path.exists('/home/rgbhack/ALTR-Backend/people/'+email):
+		return jsonify({"res":2000})
+	true_uid = open('/home/rgbhack/ALTR-Backend/people/'+email,'r').read()
+	if not true_uid == uid:
+		return jsonify({"res":1000})
+	alias = email.split('@')[0]
+	domain1 = email.split('@altr')[1]
+	domain = domain1.split('.cf')[0]
+    if os.path.exists("/home/rgbhack/ALTR-Backend/people/"+email):
+        os.remove("/home/rgbhack/ALTR-Backend/people/"+email)
+    if os.path.exists("/home/rgbhack/ALTR-Backend/status/"+email):
+        os.remove("/home/rgbhack/ALTR-Backend/status/"+email)
+    with open("/home/rgbhack/ALTR-Backend/persons/"+uid, "r") as f:
+        lines = f.readlines()
+    with open("/home/rgbhack/ALTR-Backend/persons/"+uid, "w") as f:
+        for line in lines:
+            if line.strip("\n") != email:
+                f.write(line)
+	r = requests.delete(url=newapiurl1+domain+newapiurl2+alias,headers={'Authorization':'Basic api:'+apikey},verify=False)
+	with open('/home/rgbhack/ALTR-Backend/logs.txt','w') as f:
+		print(newapiurl1+domain+newapiurl2+alias,file=f)
+	return(jsonify({"res":0}))
+
 @app.route('/')
 def index():
 	return render_template('index.html')
