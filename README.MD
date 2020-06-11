@@ -57,7 +57,7 @@ output
 }
 ```
 
-## altr.cf/status (Turn off an Alias)
+## altr.cf/status (Get Status of an Alias)
 input
 ```
 {
@@ -74,7 +74,7 @@ output (status will be on or off)
 }
 ```
 
-## altr.cf/emails (Turn off an Alias)
+## altr.cf/emails (Get Emails for a User)
 input
 ```
 {
@@ -82,7 +82,7 @@ input
 "uid":"AFJNJSA70ASFKSAFD80"
 }
 ```
-output (status will be on or off)
+output
 ```
 {
 "emails":["google12348@altr1.cf","facebook12431@altr1.cf"],
