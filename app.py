@@ -112,7 +112,7 @@ def emails():
 		base_lines = f.readlines()
 		lines = []
 		for line in base_lines:
-			lines.append(line.strip())
+			lines.append({line.strip():open('/home/rgbhack/ALTR-Backend/status/'+line.strip()).read()})
 		return(jsonify({"emails":lines,"res":0}))
 
 @app.route('/status',methods=['POST'])
