@@ -141,16 +141,16 @@ def delete():
 	alias = email.split('@')[0]
 	domain1 = email.split('@altr')[1]
 	domain = domain1.split('.cf')[0]
-    if os.path.exists("/home/rgbhack/ALTR-Backend/people/"+email):
-        os.remove("/home/rgbhack/ALTR-Backend/people/"+email)
-    if os.path.exists("/home/rgbhack/ALTR-Backend/status/"+email):
-        os.remove("/home/rgbhack/ALTR-Backend/status/"+email)
-    with open("/home/rgbhack/ALTR-Backend/persons/"+uid, "r") as f:
-        lines = f.readlines()
-    with open("/home/rgbhack/ALTR-Backend/persons/"+uid, "w") as f:
-        for line in lines:
-            if line.strip("\n") != email:
-                f.write(line)
+	if os.path.exists("/home/rgbhack/ALTR-Backend/people/"+email):
+		os.remove("/home/rgbhack/ALTR-Backend/people/"+email)
+	if os.path.exists("/home/rgbhack/ALTR-Backend/status/"+email):
+		os.remove("/home/rgbhack/ALTR-Backend/status/"+email)
+	with open("/home/rgbhack/ALTR-Backend/persons/"+uid, "r") as f:
+		lines = f.readlines()
+	with open("/home/rgbhack/ALTR-Backend/persons/"+uid, "w") as f:
+		for line in lines:
+			if line.strip() != email:
+				f.write(line)
 	r = requests.delete(url=newapiurl1+domain+newapiurl2+alias,headers={'Authorization':'Basic api:'+apikey},verify=False)
 	with open('/home/rgbhack/ALTR-Backend/logs.txt','w') as f:
 		print(newapiurl1+domain+newapiurl2+alias,file=f)
