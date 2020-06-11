@@ -8,6 +8,27 @@
 - 4000 = no more emails (domains have ran out)
 - 5000 = alias limit reached for user
 
+## how to send a POST request
+```
+jQuery.ajax({
+        url: "http://URL",
+        type: "POST",
+        data: JSON.stringify({
+            field1: "data1",
+            field2: "data2",
+        }),
+        contentType: "application/json",
+        beforeSend: function (x) {
+            if (x && x.overrideMimeType) {
+                x.overrideMimeType("application/json;charset=UTF-8");
+            }
+        },
+        success: function (result) {
+            var FIELD = result.FIELD;
+        },
+    });
+```
+
 ## altr.cf/create (Create an Alias)
 input
 ```
@@ -86,6 +107,21 @@ output
 ```
 {
 "emails":["google12348@altr1.cf","facebook12431@altr1.cf"],
+"res":0
+}
+```
+
+## altr.cf/delete (Delete an Alias)
+input
+```
+{
+"email":"google1234@altr1.cf",
+"uid":"AFJNJSA70ASFKSAFD80"
+}
+```
+output
+```
+{
 "res":0
 }
 ```
