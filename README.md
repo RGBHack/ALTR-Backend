@@ -5,7 +5,6 @@
 - 0 = successful
 - 1000 = incorrect UID (ie UID does not own email specified)
 - 2000 = non-existent email
-- 3000 = non-existent UID
 - 4000 = no more emails (domains have ran out)
 - 5000 = alias limit reached for user
 

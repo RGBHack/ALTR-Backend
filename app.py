@@ -107,7 +107,7 @@ def off():
 def emails():
 	uid = request.json["uid"]
 	if not os.path.exists('/home/rgbhack/ALTR-Backend/persons/'+uid):
-		return jsonify({"res":3000})
+		return jsonify({"res":0,"emails":[]})
 	with open('/home/rgbhack/ALTR-Backend/persons/'+uid, 'r') as f:
 		base_lines = f.readlines()
 		lines = []
