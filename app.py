@@ -23,6 +23,10 @@ def create():
 	global curdomain
 	global curnum
 	global number_position
+	uid = request.json["uid"]
+	if os.path.exists('/home/rgbhack/ALTR-Backend/persons/'+uid):
+		if len(open('/home/rgbhack/ALTR-Backend/persons/'+uid,'r').readlines()) >= 5:
+			return jsonify({"res":5000})
 	if curnum == 10:
 		curdomain = curdomain + 1
 		with open('/home/rgbhack/ALTR-Backend/curnum', 'w') as f:
@@ -39,7 +43,6 @@ def create():
 
 	username = request.json["username"]
 	newmail = request.json["youremail"]
-	uid = request.json["uid"]
 	ret = {}
 	number_position = number_position + 1
 	with open('/home/rgbhack/ALTR-Backend/number_position', 'w') as f:
@@ -54,7 +57,7 @@ def create():
 	with open('/home/rgbhack/ALTR-Backend/people/'+ret["email"], 'w') as f:
 		f.write(uid)
 	with open('/home/rgbhack/ALTR-Backend/persons/'+uid, 'a') as f:
-		f.write(ret["email"])
+		f.write(ret["email"]+'\n')
 	with open('/home/rgbhack/ALTR-Backend/status/'+ret["email"], 'w') as f:
 		f.write("on")
 	ret["res"] = 0
