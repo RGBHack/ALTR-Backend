@@ -1,5 +1,5 @@
 # ALTR-Backend
-Backend of [ALTR Extension](https://github.com/RGBHack/ALTR-ext)
+Backend for [ALTR Extension](https://github.com/RGBHack/ALTR-ext)
 
 ## Response (res) Codes
 
