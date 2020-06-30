@@ -101,7 +101,7 @@ def off():
 	domain = domain1.split('.cf')[0]
 	with open('/home/rgbhack/ALTR-Backend/status/'+email,'w') as f:
 		f.write("off")
-	r = requests.put(url=newapiurl1+domain+newapiurl2+alias,headers={'Authorization':'Basic api:'+apikey},json={"forward":"hi@altr.cf"},verify=False)
+	r = requests.put(url=newapiurl1+domain+newapiurl2+alias,headers={'Authorization':'Basic api:'+apikey},json={"forward":"altr.cf.rgbhack@gmail.com"},verify=False)
 	with open('/home/rgbhack/ALTR-Backend/logs.txt','w') as f:
 		print(newapiurl1+domain+newapiurl2+alias,file=f)
 	return(jsonify({"res":0}))
