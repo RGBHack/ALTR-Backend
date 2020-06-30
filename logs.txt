@@ -1,1 +1,1 @@
-https://api.improvmx.com/v3/domains/altr2.cf/aliases/github928516
+https://api.improvmx.com/v3/domains/altr2.cf/aliases/heroku623343
